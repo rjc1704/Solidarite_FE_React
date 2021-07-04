@@ -3,7 +3,7 @@ import PostItem from "./PostItem";
 import axios from "axios";
 import { ListWrapper } from "../styled-components/postItemList";
 
-export default function PostItemList({ query, tabMenu, goToDetailPage }) {
+export default function PostItemList({ query, tabMenu }) {
   const [APostList, setAPostList] = useState([]);
   const [BPostList, setBPostList] = useState([]);
   const [pageANo, setPageANo] = useState(0);
@@ -27,11 +27,15 @@ export default function PostItemList({ query, tabMenu, goToDetailPage }) {
     if (Math.ceil(scrollTop + clientHeight) >= parseInt(scrollHeight)) {
       if (tabMenu === 0) {
         setTimeout(() => {
-          setPageANo((pageANo) => pageANo + 1);
+          setPageANo((pageANo) => {
+            if (pageANo < 10) return pageANo + 1;
+          });
         }, 300);
       } else {
         setTimeout(() => {
-          setPageBNo((pageBNo) => pageBNo + 1);
+          setPageBNo((pageBNo) => {
+            if (pageBNo < 10) return pageBNo + 1;
+          });
         }, 300);
       }
     }
@@ -83,7 +87,7 @@ export default function PostItemList({ query, tabMenu, goToDetailPage }) {
         });
       }
     }
-  }, [tabMenu, , query, pageANo, pageBNo]);
+  }, [tabMenu, query, pageANo, pageBNo]);
 
   return (
     <ListWrapper>
@@ -95,7 +99,6 @@ export default function PostItemList({ query, tabMenu, goToDetailPage }) {
               title={el.title}
               content={el.content}
               type={el.type}
-              goToDetailPage={goToDetailPage}
             />
           ))
         : BPostList.map((el, idx) => (
@@ -105,7 +108,6 @@ export default function PostItemList({ query, tabMenu, goToDetailPage }) {
               title={el.title}
               content={el.content}
               type={el.type}
-              goToDetailPage={goToDetailPage}
             />
           ))}
     </ListWrapper>

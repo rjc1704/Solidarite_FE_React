@@ -6,16 +6,22 @@ import {
   BtnWrapper,
   BackBtn,
 } from "../styled-components/detailPage";
+import { useHistory, useLocation } from "react-router";
 
-export default function DetailPage({ titleAndContent, goToMainPage }) {
+export default function DetailPage() {
+  const history = useHistory();
+  const location = useLocation();
+  const title = location.state.title;
+  const content = location.state.content;
+
   return (
     <PageWrapper>
       <ContentBox>
-        <Title>{titleAndContent.title}</Title>
-        <Content>{titleAndContent.content}</Content>
+        <Title>{title}</Title>
+        <Content>{content}</Content>
       </ContentBox>
       <BtnWrapper>
-        <BackBtn onClick={goToMainPage}>뒤로가기</BackBtn>
+        <BackBtn onClick={() => history.go(-1)}>뒤로가기</BackBtn>
       </BtnWrapper>
     </PageWrapper>
   );

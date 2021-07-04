@@ -3,7 +3,7 @@ import SearchBar from "./SearchBar";
 import Posts from "./Posts";
 import { PageWrapper, Header, Main } from "../styled-components/mainPage";
 
-export default function MainPage({ goToDetailPage }) {
+export default function MainPage() {
   const [query, setQuery] = useState("");
   function debounce(func, timeout = 150) {
     let timer;
@@ -25,7 +25,7 @@ export default function MainPage({ goToDetailPage }) {
       <Header>게시물을 검색해보세요</Header>
       <Main>
         <SearchBar searchQuery={searchQuery} />
-        <Posts query={query} goToDetailPage={goToDetailPage} />
+        <Posts query={query} />
       </Main>
     </PageWrapper>
   );

@@ -2,7 +2,7 @@ import { useState } from "react";
 import PostItemList from "./PostItemList";
 import { PostsWrapper, Options, Option } from "../styled-components/posts";
 
-export default function Posts({ query, goToDetailPage }) {
+export default function Posts({ query }) {
   const [tabMenu, setTabMenu] = useState(0);
   const showAPosts = () => {
     setTabMenu(0);
@@ -20,11 +20,7 @@ export default function Posts({ query, goToDetailPage }) {
           B Posts
         </Option>
       </Options>
-      <PostItemList
-        query={query}
-        tabMenu={tabMenu}
-        goToDetailPage={goToDetailPage}
-      />
+      <PostItemList query={query} tabMenu={tabMenu} />
     </PostsWrapper>
   );
 }
